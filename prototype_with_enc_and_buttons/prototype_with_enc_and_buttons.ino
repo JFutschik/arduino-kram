@@ -23,8 +23,15 @@ volatile int posB = 0;
 volatile int posC = 0;
 volatile int posD = 0;
 volatile int posE = 0;
-int lastButton1State = LOW;
-unsigned long lastButton1Debounce = 0;
+
+unsigned long lastDebounceTime = 0;
+unsigned long debounceDelay = 50;
+
+int lastButtonState = HIGH;
+int buttonState;
+int debounceDone;
+
+int buttonArray[] = {button1, button2, button3, button4, button5};
 
 void interruptA(){
   static unsigned long lastInterruptTime = 0;
@@ -124,12 +131,24 @@ void interruptE(){
   
   }
 
-  void debounceButton(){
-    int buttonState = digitalRead(button1);
-    if (buttonState != lastButton1State && buttonState == HIGH){
-      Serial.write("BUTTON");
-      }
+
+    void debounceButton(int buttonPin){
+  int reading = digitalRead(buttonPin);
+  if (reading != lastButtonState) {
+    lastDebounceTime = millis();
   }
+
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    if (reading != buttonState) {
+      buttonState = reading;
+      if (buttonState == LOW) {
+        Serial.write("HALLO");
+      }
+    }
+  }
+  lastButtonState = reading;
+}
+
 void setup() {
   pinMode(DATA1, INPUT_PULLUP);
   pinMode(CLK1, INPUT_PULLUP);
@@ -156,18 +175,7 @@ void setup() {
 };
 
 void loop(){
-  
-    debounceButton();
-  
-  if (digitalRead(button2) == LOW){
-    Serial.println("Button 2");}
-  
-  if (digitalRead(button3) == LOW){
-    Serial.println("Button 3");}
-  
-  if (digitalRead(button4) == LOW){
-    Serial.println("Button 4");}
-  
-  if (digitalRead(button5) == LOW){
-    Serial.println("Button 5");}
+    
+    debounceButton(button1);
+
   }

@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:leonardo",
+    "port": "COM7",
+    "programmer": "arduino:avrispmkii",
+    "sketch": "prototype_with_enc_and_buttons.ino"
+}
