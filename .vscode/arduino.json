@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:leonardo",
+    "port": "COM5",
+    "programmer": "arduino:avrispmkii",
+    "sketch": "working_button_debounce.ino\\working_button_debounce.ino.ino"
+}
