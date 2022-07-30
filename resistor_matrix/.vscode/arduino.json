@@ -1,0 +1,6 @@
+{
+    "port": "COM11",
+    "board": "arduino:avr:leonardo",
+    "programmer": "arduino:avrispmkii",
+    "sketch": "resistor_matrix.ino"
+}

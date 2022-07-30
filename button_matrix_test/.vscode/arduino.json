@@ -1,0 +1,6 @@
+{
+    "port": "COM7",
+    "board": "arduino:avr:leonardo",
+    "programmer": "arduino:avrispmkii",
+    "sketch": "button_matrix_test.ino"
+}
